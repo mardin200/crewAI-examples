@@ -1,0 +1,58 @@
+research_company_culture:
+  description: >
+    Analyze the supplied information for {company_name}.
+    Company domain: {company_domain}
+    Company description: {company_description}
+    Identify only the mission/context, culture themes, and candidate-facing messages
+    that are supported by these inputs. Do not claim you browsed the website.
+  expected_output: >
+    Structured company research with a short context summary, supported culture themes,
+    and accurate candidate-facing messages.
+  agent: research_analyst
+
+research_role_requirements:
+  description: >
+    Analyze this job opening:
+    Title: {job_title}
+    Location: {location}
+    Hiring needs: {hiring_needs}
+    Extract the required skills, relevant experience/background, and personal qualities.
+    Keep requirements proportional to the supplied description; do not add arbitrary degrees,
+    years of experience, or certifications.
+  expected_output: >
+    Structured role requirements containing skills, experience/background, and qualities.
+  agent: research_analyst
+
+draft_job_posting:
+  description: >
+    Draft a complete job posting for {company_name} for the role {job_title} in {location}.
+    Use the company research and role-requirements outputs from earlier tasks.
+    Hiring needs: {hiring_needs}
+    Benefits supplied by the user: {specific_benefits}
+    Include a short company introduction, role summary, responsibilities, qualifications,
+    benefits, and a concise application invitation. Do not invent salary, legal terms,
+    benefits, or company facts. Mark any missing application instructions as a placeholder.
+  expected_output: >
+    A well-organized Markdown job posting with clear headings and no unsupported claims.
+  agent: job_description_writer
+
+review_and_edit_job_posting:
+  description: >
+    Review and improve the draft job posting produced by the previous task.
+    Check factual support, readability, inclusive language, consistency with {hiring_needs},
+    and accurate use of {specific_benefits}. Remove invented details and duplicated wording.
+    Return the revised full posting, not a list of suggested edits.
+  expected_output: >
+    The final revised job posting in Markdown, ready for human review before publication.
+  agent: review_editor
+
+industry_analysis:
+  description: >
+    Provide a brief, cautious industry context note for the {job_title} role at {company_name},
+    using only general knowledge and the supplied inputs. Do not present this as live market
+    research and do not add unsupported statistics or current salary claims. List practical
+    considerations that a recruiter may want to validate before publishing the role.
+  expected_output: >
+    A concise industry-context note that separates general considerations from facts that
+    require external verification.
+  agent: research_analyst
